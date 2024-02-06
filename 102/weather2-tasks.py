@@ -1,4 +1,4 @@
-import httpx  # requests capability, but can work with async
+import httpx
 from prefect import flow, task
 
 

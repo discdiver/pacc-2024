@@ -11,5 +11,6 @@ def fetch_weather(lat: float = 38.9, lon: float = -77.0):
     print(f"Forecasted temp C: {forecasted_temp} degrees")
     return forecasted_temp
 
+
 if __name__ == "__main__":
     fetch_weather()

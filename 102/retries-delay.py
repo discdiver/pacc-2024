@@ -2,7 +2,7 @@ import httpx
 from prefect import flow, task
 
 
-@task(retries=4, retry_delay_seconds=0.1)
+@task(retries=4, retry_delay_seconds=0.5)  # or [0.1, 0.5, 1, 2])
 def fetch_random_code():
     random_code = httpx.get("https://httpstat.us/Random/200,500", verify=False)
     if random_code.status_code >= 400:
@@ -16,4 +16,4 @@ def fetch():
 
 
 if __name__ == "__main__":
-    fetch_random_code()
+    fetch()
