@@ -15,8 +15,7 @@ def my_task():
 
 @flow(result_storage=GCSBucket.load("my-bucket-block"))
 def my_flow():
-    res = my_task()
-    return "success"
+    df = my_task()
 
 
 if __name__ == "__main__":

@@ -11,7 +11,6 @@ def my_task():
 @flow
 def my_flow():
     res = my_task()
-    return "success"
 
 
 if __name__ == "__main__":
