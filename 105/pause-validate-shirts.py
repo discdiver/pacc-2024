@@ -18,3 +18,7 @@ class ShirtOrder(RunInput):
 @flow
 def get_shirt_order():
     shirt_order = pause_flow_run(wait_for_input=ShirtOrder)
+
+
+if __name__ == "__main__":
+    get_shirt_order()
