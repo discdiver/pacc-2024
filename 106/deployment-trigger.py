@@ -10,13 +10,7 @@ def downstream_flow(ticker: str) -> str:
 downstream_deployment_trigger = DeploymentTrigger(
     name="Upstream Flow - Sell",
     enabled=True,
-    match_related={
-        "prefect.resource.id": "prefect.flow.dc12a46b-ef4d-437f-8f9d-ebaefbadba86"
-    },
-    expect={"prefect.result.produced"},
-    parameters={
-        "ticker": "{{event.payload.result}}",
-    },
+    match={"prefect.resource.id": "prefect.flow.dc12a46b-ef4d-437f-8f9d-ebaefbadba86"},
 )
 
 
