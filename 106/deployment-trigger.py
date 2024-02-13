@@ -10,7 +10,10 @@ def downstream_flow(ticker: str = "AAPL") -> str:
 downstream_deployment_trigger = DeploymentTrigger(
     name="Upstream Flow - Sell",
     enabled=True,
-    match={"prefect.resource.id": "5c933ae4-dd43-4705-90eb-cfdeb4c028fb"},
+    match_related={
+        "prefect.resource.id": "prefect.flow.5c933ae4-dd43-4705-90eb-cfdeb4c028fb"
+    },
+    expect={"prefect.flow-run.Completed"},
 )
 
 
@@ -20,7 +23,7 @@ downstream_deployment_trigger = DeploymentTrigger(
 # match the flow id of the upstream flow
 
 # here we take the flow id from the emitted event's payload
-# and apply it to the flows parameter
+# and apply it to the flow's parameter
 
 if __name__ == "__main__":
     downstream_flow.from_source(
