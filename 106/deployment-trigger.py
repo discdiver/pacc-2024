@@ -10,7 +10,7 @@ def downstream_flow(ticker: str) -> str:
 downstream_deployment_trigger = DeploymentTrigger(
     name="Upstream Flow - Sell",
     enabled=True,
-    match={"prefect.resource.id": "prefect.flow.dc12a46b-ef4d-437f-8f9d-ebaefbadba86"},
+    match={"prefect.resource.id": "prefect.flow-run.*"},
 )
 
 
