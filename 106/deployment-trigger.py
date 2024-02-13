@@ -3,18 +3,20 @@ from prefect.events.schemas import DeploymentTrigger
 
 
 @flow(log_prints=True)
-def downstream_flow(prev_result: str) -> str:
-    print(f"got {prev_result}")
+def downstream_flow(ticker: str) -> str:
+    print(f"got {ticker}")
 
 
 downstream_deployment_trigger = DeploymentTrigger(
     name="Upstream Flow - Sell",
     enabled=True,
-    match_related={"prefect.resource.id": "prefect.flow."},
+    match_related={
+        "prefect.resource.id": "prefect.flow.dc12a46b-ef4d-437f-8f9d-ebaefbadba86"
+    },
     expect={"prefect.result.produced"},
-    # parameters={
-    #     "prev_result": "{{event.payload.result}}",
-    # },
+    parameters={
+        "ticker": "{{event.payload.result}}",
+    },
 )
 
 
@@ -29,9 +31,9 @@ downstream_deployment_trigger = DeploymentTrigger(
 if __name__ == "__main__":
     downstream_flow.from_source(
         source="https://github.com/discdiver/pacc-2024.git",
-        entrypoint="102/weather2-tasks.py:pipeline",
+        entrypoint="106/deployment-trigger.py:downstream_flow",
     ).deploy(
-        name="flow-with-weather-trigger",
+        name="ticker-deploy",
         work_pool_name="managed1",
         triggers=[downstream_deployment_trigger],
     )
