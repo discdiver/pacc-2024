@@ -1,3 +1,4 @@
+from typing import Literal
 import pydantic
 from prefect import flow, pause_flow_run
 from prefect.input import RunInput
